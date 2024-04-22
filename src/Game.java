@@ -12,7 +12,7 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	private int key; 
 	private Player play;
     private PlayableGuy p;
-	
+	private char screen;
  
 
 	
@@ -20,7 +20,7 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 		new Thread(this).start();	
 		this.addKeyListener(this);
 		key =-1; 
-		screen='S';
+		screen = 'S';
 		music=new Sound();
 		playSound=true;
 		playSound2=true;
