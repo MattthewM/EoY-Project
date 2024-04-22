@@ -7,23 +7,72 @@ import java.awt.event.*;
 
 public class Game  extends JPanel implements Runnable, KeyListener{
 
-	
+	private ImageIcon background;
 	private BufferedImage back; 
 	private int key; 
-
-
+	private Player play;
+    private PlayableGuy p;
+	
+ 
 
 	
 	public Game() {
 		new Thread(this).start();	
 		this.addKeyListener(this);
 		key =-1; 
+		screen='S';
+		music=new Sound();
+		playSound=true;
+		playSound2=true;
+		background = new ImageIcon("checker.png");
+		p = new PlayableGuy(100, 300, 50, 50, "p.png");
 		
 	
 	}
 
 	
+	public void screen(Graphics g2d) {
+		switch(screen) {
+
+		case 'S':
+			//start screen
+			g2d.drawImage(background.getImage(), 0,  0,  getWidth(),  getHeight(), this);
+			drawStartScreen(g2d);
+			
+			break;
+		case 'G':
+			//game screen
+			
+			g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
+		
+            }
+            
+            }
+            
+            
+            break;
+			 
+			 
+		case 'W':
+			g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
+			 g2d.setColor(Color.white);
+	            g2d.drawString("Congratulations! You won!", 200, 400);
+	            
+			//win screen
 	
+			
+			break;
+		case 'L':
+			g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
+			g2d.setColor(Color.white);
+            g2d.drawString("Congratulations on losing ", 200, 400);
+			
+			//lose screen
+			
+			break;
+		}
+  
+	}
 	public void run()
 	   {
 	   	try
@@ -84,7 +133,20 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 		
 		key= e.getKeyCode();
 		System.out.println(key);
+		if (key == 39) { 
+	        p.setdx(2);
+	    }
+		else if (key == 37) { 
+	        p.setdx(-2);
+	    } 
+		else if (key == 40) { 
+	        p.setdy(2);
+	    } 
+		else if (key == 38) { 
+	        p.setdy(-2);
+	    }
 		
+	}
 		
 		
 	
