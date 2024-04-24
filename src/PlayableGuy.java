@@ -37,6 +37,35 @@ public class PlayableGuy {
     public void draw(Graphics2D g2d) {
         g2d.drawImage(image.getImage(), x, y, width, height, null);
     }
+    public ImageIcon getPic() {
+        return image;
+    }
 
-    // Add getters and setters if needed
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getW() {
+        return width;
+    }
+
+    public int getH() {
+        return height;
+    }
+
+    // Add setters if needed for modifying player's properties
+
+    public void setdx(int dx) {
+        this.dx = dx;
+    }
+
+    public void setdy(int dy) {
+        this.dy = dy;
+    }
+
+   
 }
