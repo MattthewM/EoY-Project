@@ -57,7 +57,7 @@ public class PlayableGuy {
         return height;
     }
 
-    // Add setters if needed for modifying player's properties
+    
 
     public void setdx(int dx) {
         this.dx = dx;
