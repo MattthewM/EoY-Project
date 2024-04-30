@@ -52,8 +52,7 @@ public void screen(Graphics g2d) {
 			//game screen
 			
 			g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
-			drawPlayableGuy(g2d);
-            
+			
             
             
             
@@ -82,7 +81,9 @@ public void screen(Graphics g2d) {
   
 	}
 
-
+public void drawPlayer(Graphics2D g2d) {
+    player.draw(g2d);
+}
 	public void run()
 	   {
 	   	try
@@ -108,10 +109,6 @@ public void screen(Graphics g2d) {
 
 }
 	
-	public void drawPlayableGuy(Graphics g2d) {
-		g2d.drawImage(player.getPic().getImage(),player.getX(),player.getY(),player.getW(),player.getH(),this);
-
-	}
 	
 	public void paint(Graphics g){
 		
