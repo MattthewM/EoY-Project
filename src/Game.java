@@ -10,41 +10,33 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	private ImageIcon background;
 	private BufferedImage back; 
 	private int key; 
-	private Sound music;
-    private PlayableGuy player;
+	private Player play;
+    private PlayableGuy p;
 	private char screen;
-	private boolean playSound, playSound2;
-	
-	
  
-
 
 	
 	public Game() {
 		new Thread(this).start();	
 		this.addKeyListener(this);
 		key =-1; 
-		screen='S';
+		screen = 'S';
 		music=new Sound();
 		playSound=true;
 		playSound2=true;
-		background = new ImageIcon("CheckerV3.png");
-		player = new PlayableGuy(100, 300, 50, 50, "Player.png");
-		
+		background = new ImageIcon("checker.png");
+		p = new PlayableGuy(100, 300, 50, 50, "p.png");
 		
 	
 	}
 
 	
-public void screen(Graphics g2d) {
-	switch(screen) {
+	public void screen(Graphics g2d) {
+		switch(screen) {
 
 		case 'S':
 			//start screen
-			g2d.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), this);
-            g2d.setColor(Color.red);
-            g2d.setFont(new Font("Arial", Font.BOLD, 24));
-            g2d.drawString("Press 'B' to begin the game", 200, 300);
+			g2d.drawImage(background.getImage(), 0,  0,  getWidth(),  getHeight(), this);
 			drawStartScreen(g2d);
 			
 			break;
@@ -52,9 +44,10 @@ public void screen(Graphics g2d) {
 			//game screen
 			
 			g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
-			
+		
+            }
             
-            
+            }
             
             
             break;
@@ -62,7 +55,7 @@ public void screen(Graphics g2d) {
 			 
 		case 'W':
 			g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
-			 g2d.setColor(Color.red);
+			 g2d.setColor(Color.white);
 	            g2d.drawString("Congratulations! You won!", 200, 400);
 	            
 			//win screen
@@ -71,7 +64,7 @@ public void screen(Graphics g2d) {
 			break;
 		case 'L':
 			g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
-			g2d.setColor(Color.red);
+			g2d.setColor(Color.white);
             g2d.drawString("Congratulations on losing ", 200, 400);
 			
 			//lose screen
@@ -80,10 +73,6 @@ public void screen(Graphics g2d) {
 		}
   
 	}
-
-public void drawPlayer(Graphics2D g2d) {
-    player.draw(g2d);
-}
 	public void run()
 	   {
 	   	try
@@ -99,15 +88,8 @@ public void drawPlayer(Graphics2D g2d) {
 	      }
 	  	}
 	
-	public void drawStartScreen(Graphics g2d) {
-		//create start screen
-		g2d.setFont( new Font("Broadway", Font.BOLD, 50));
-		g2d.setColor(Color.red);
-		g2d.drawString("Welcome to The Worlds Hardest Game", 200,400);
-		g2d.drawString("Press B to Begin", 200, 600);
-		g2d.drawString("Use arrow keys to move ", 200, 800);
 
-}
+	
 	
 	
 	public void paint(Graphics g){
@@ -124,9 +106,9 @@ public void drawPlayer(Graphics2D g2d) {
 		g2d.setFont( new Font("Broadway", Font.BOLD, 50));
 		
 		g2d.drawString("key " + key, 340, 100);
-		screen(g2d);
+		
+	
 		twoDgraph.drawImage(back, null, 0, 0);
-
 
 	}
 
@@ -139,8 +121,7 @@ public void drawPlayer(Graphics2D g2d) {
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-		}		
-	
+	}
 
 
 
@@ -149,39 +130,28 @@ public void drawPlayer(Graphics2D g2d) {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		key= e.getKeyCode();{
-			System.out.println(key);
-			if(key==66) {
-				screen = 'G';
-			}
-				 
+		
 		key= e.getKeyCode();
 		System.out.println(key);
 		if (key == 39) { 
-	        player.setdx(2);
+	        p.setdx(2);
 	    }
 		else if (key == 37) { 
-	        player.setdx(-2);
+	        p.setdx(-2);
 	    } 
 		else if (key == 40) { 
-	        player.setdy(2);
+	        p.setdy(2);
 	    } 
 		else if (key == 38) { 
-	        player.setdy(-2);
+	        p.setdy(-2);
 	    }
-		
-		}
 		
 	}
 		
-	
-	
 		
 	
-	
-	
-	
-	
+	}
+
 
 	//DO NOT DELETE
 	@Override
