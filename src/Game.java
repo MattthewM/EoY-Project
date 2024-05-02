@@ -1,61 +1,61 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage; 
 import java.awt.event.*; 
-
-
 public class Game  extends JPanel implements Runnable, KeyListener{
-
 	private ImageIcon background;
 	private BufferedImage back; 
 	private int key; 
-	private Player play;
-    private PlayableGuy p;
+	private Sound music;
+    private PlayableGuy player;
 	private char screen;
+	private boolean playSound, playSound2;
+	
+	
  
-
 	
 	public Game() {
 		new Thread(this).start();	
 		this.addKeyListener(this);
 		key =-1; 
-		screen = 'S';
+		screen='S';
 		music=new Sound();
 		playSound=true;
 		playSound2=true;
-		background = new ImageIcon("checker.png");
-		p = new PlayableGuy(100, 300, 50, 50, "p.png");
+		background = new ImageIcon("CheckerV3.png");
+		player = new PlayableGuy(100, 300, 50, 50, "Player.png");
+		
 		
 	
 	}
-
 	
-	public void screen(Graphics g2d) {
-		switch(screen) {
-
+public void screen(Graphics g2d) {
+	switch(screen) {
 		case 'S':
 			//start screen
-			g2d.drawImage(background.getImage(), 0,  0,  getWidth(),  getHeight(), this);
+			g2d.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), this);
+            g2d.setColor(Color.red);
+            g2d.setFont(new Font("Arial", Font.BOLD, 24));
+            g2d.drawString("Press 'B' to begin the game", 200, 300);
 			drawStartScreen(g2d);
 			
 			break;
 		case 'G':
 			//game screen
-			
+
 			g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
 		
-            }
-            
-            }
-            
+
+
+
+
             
             break;
 			 
 			 
 		case 'W':
 			g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
-			 g2d.setColor(Color.white);
+			 g2d.setColor(Color.red);
 	            g2d.drawString("Congratulations! You won!", 200, 400);
 	            
 			//win screen
@@ -64,15 +64,20 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 			break;
 		case 'L':
 			g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
-			g2d.setColor(Color.white);
+			g2d.setColor(Color.red);
             g2d.drawString("Congratulations on losing ", 200, 400);
 			
 			//lose screen
 			
 			break;
 		}
-  
+
 	}
+
+
+public void drawPlayer(Graphics2D g2d) {
+    player.draw(g2d);
+}
 	public void run()
 	   {
 	   	try
@@ -88,17 +93,24 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	      }
 	  	}
 	
+	public void drawStartScreen(Graphics g2d) {
+		//create start screen
+		g2d.setFont( new Font("Broadway", Font.BOLD, 50));
+		g2d.setColor(Color.red);
+		g2d.drawString("Welcome to The Worlds Hardest Game", 200,400);
+		g2d.drawString("Use arrow keys to move", 200, 600);
+		
+
+}
 
 	
-	
-	
+
 	public void paint(Graphics g){
-		
+
 		Graphics2D twoDgraph = (Graphics2D) g; 
 		if( back ==null)
 			back=(BufferedImage)( (createImage(getWidth(), getHeight()))); 
 		
-
 		Graphics g2d = back.createGraphics();
 	
 		g2d.clearRect(0,0,getSize().width, getSize().height);
@@ -106,53 +118,54 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 		g2d.setFont( new Font("Broadway", Font.BOLD, 50));
 		
 		g2d.drawString("key " + key, 340, 100);
-		
-	
+		screen(g2d);
 		twoDgraph.drawImage(back, null, 0, 0);
-
 	}
-
 	
-
-
-
 	//DO NOT DELETE
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-	}
-
-
-
-
+		}		
+	
 //DO NOT DELETE
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		key= e.getKeyCode();{
+			System.out.println(key);
+			if(key==66) {
+				screen = 'G';
+			}
+				 
 		key= e.getKeyCode();
 		System.out.println(key);
 		if (key == 39) { 
-	        p.setdx(2);
+	        player.setdx(2);
 	    }
 		else if (key == 37) { 
-	        p.setdx(-2);
+	        player.setdx(-2);
 	    } 
 		else if (key == 40) { 
-	        p.setdy(2);
+	        player.setdy(2);
 	    } 
 		else if (key == 38) { 
-	        p.setdy(-2);
+	        player.setdy(-2);
 	    }
 		
-	}
+		}
 		
+	}
 		
 	
-	}
-
-
+	
+		
+	
+	
+	
+	
+	
 	//DO NOT DELETE
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -164,6 +177,5 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	
 	
 	
-
 	
 }
