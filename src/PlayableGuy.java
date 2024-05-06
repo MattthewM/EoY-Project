@@ -15,6 +15,8 @@ public class PlayableGuy {
     	width=100;
     	height=100;
     	pic = new ImageIcon("Player.png");
+    	dx=0;
+    	dy=0;
     }
 
     
@@ -30,16 +32,16 @@ public class PlayableGuy {
     // Other methods...
 
     public void move() {
-        x += dx;
-        y += dy;
+        x+= dx;
+        y+= dy;
     }
 
     public void setdx(int dx) {
-        this.dx = dx;
+        x+= dx;
     }
 
     public void setdy(int dy) {
-        this.dy = dy;
+        y+= dy;
     }
 
     public int getX() {

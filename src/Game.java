@@ -31,7 +31,7 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	    playSound = true;
 	    playSound2 = true;
 	    background = new ImageIcon("CheckerV3.png");
-	    player = new PlayableGuy(100, 300, 100, 150, new ImageIcon ("Player.png")); // Adjust width and height as needed
+	    player = new PlayableGuy(100, 300, 200, 250, new ImageIcon ("Player.png")); // Adjust width and height as needed
 	}
 
 		
