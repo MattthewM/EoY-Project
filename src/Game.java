@@ -79,6 +79,8 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 
 	            enemy4.move();
 	            bounceEnemy(enemy4);
+	            checkLose();
+	            checkWin();
 	            break;
 	        case 'W':
 	            g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
@@ -102,6 +104,12 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 		g2d.drawImage(enemy3.getPic().getImage(),enemy3.getX(),enemy3.getY(),enemy3.getWidth(),enemy3.getHeight(),this);
 		g2d.drawImage(enemy4.getPic().getImage(),enemy4.getX(),enemy4.getY(),enemy4.getWidth(),enemy4.getHeight(),this);
 	}
+	
+	public void checkWin() {
+        if (player.getX() >= 1150) {
+            screen = 'W'; // Set screen to win
+        }
+    }
 	public void run()
 	   {
 	   	try
@@ -110,6 +118,7 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	   		{
 	   		   Thread.currentThread().sleep(5);
 	            repaint();
+	            
 	            
 	         }
 	      }
@@ -138,7 +147,12 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	        
 	        }
 	    
-	 
+	 public void checkLose() {
+		    if (player.checkCollision(enemy1) || player.checkCollision(enemy2) || 
+		        player.checkCollision(enemy3) || player.checkCollision(enemy4)) {
+		        screen = 'L'; // Set the screen to lose
+		    }
+		}
 	public void drawEnemies(Graphics2D g2d) {
         // Draw each enemy
         

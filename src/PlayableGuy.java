@@ -8,6 +8,7 @@ public class PlayableGuy {
     public ImageIcon pic;
     private int dx, dy;
     
+    
     public PlayableGuy()
     {
     	x=0;
@@ -63,5 +64,14 @@ public class PlayableGuy {
 	{
 	return pic;
 	}
-   
+    public boolean checkCollision(Enemy enemy) {
+        // AABB collision detection with a single Enemy
+        return (this.x + this.width >= enemy.getX() &&
+                enemy.getX() + enemy.getWidth() >= this.x &&
+                this.y + this.height >= enemy.getY() &&
+                enemy.getY() + enemy.getHeight() >= this.y);
+    }
 }
+   
+
+    
