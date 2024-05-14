@@ -14,7 +14,10 @@ public class Game  extends JPanel implements Runnable, KeyListener{
     private PlayableGuy player;
 	private char screen;
 	private boolean playSound, playSound2;
-	
+	 private Enemy enemy1;
+	    private Enemy enemy2;
+	    private Enemy enemy3;
+	    private Enemy enemy4;
 	
  
 
@@ -30,8 +33,18 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	    music = new Sound();
 	    playSound = true;
 	    playSound2 = true;
-	    background = new ImageIcon("CheckerV3.png");
-	    player = new PlayableGuy(100, 300, 200, 250, new ImageIcon ("Player.png")); // Adjust width and height as needed
+	    background = new ImageIcon("Skibidi.jpg"
+	    		+ "");
+	    player = new PlayableGuy(100, 300, 100, 150, new ImageIcon ("Player.png")); // Adjust width and height as needed
+	    ImageIcon enemyImage1 = new ImageIcon("Normal.png");
+        ImageIcon enemyImage2 = new ImageIcon("Normal.png");
+        ImageIcon enemyImage3 = new ImageIcon("Normal.png");
+        ImageIcon enemyImage4 = new ImageIcon("Normal.png");
+        
+        enemy1 = new Enemy(500, 200, 50, 50, enemyImage1);
+        enemy2 = new Enemy(700, 400, 50, 50, enemyImage2);
+        enemy3 = new Enemy(900, 100, 50, 50, enemyImage3);
+        enemy4 = new Enemy(1100, 300, 50, 50, enemyImage4);
 	}
 
 		
@@ -54,6 +67,18 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	            // game screen
 	            g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
 	            drawPlayableGuy(g2d); // Draw the player
+	            drawEnemies(g2d);
+	            enemy1.move();
+	            bounceEnemy(enemy1);
+
+	            enemy2.move();
+	            bounceEnemy(enemy2);
+
+	            enemy3.move();
+	            bounceEnemy(enemy3);
+
+	            enemy4.move();
+	            bounceEnemy(enemy4);
 	            break;
 	        case 'W':
 	            g2d.drawImage(background.getImage(),0, 0, getWidth(), getHeight(), this);
@@ -71,7 +96,12 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	public void drawPlayableGuy(Graphics g2d) {
 		g2d.drawImage(player.getPic().getImage(),player.getX(),player.getY(),player.getWidth(),player.getHeight(),this);
 	}
-
+	public void drawEnemies(Graphics g2d) {
+		g2d.drawImage(enemy1.getPic().getImage(),enemy1.getX(),enemy1.getY(),enemy1.getWidth(),enemy1.getHeight(),this);
+		g2d.drawImage(enemy2.getPic().getImage(),enemy2.getX(),enemy2.getY(),enemy2.getWidth(),enemy2.getHeight(),this);
+		g2d.drawImage(enemy3.getPic().getImage(),enemy3.getX(),enemy3.getY(),enemy3.getWidth(),enemy3.getHeight(),this);
+		g2d.drawImage(enemy4.getPic().getImage(),enemy4.getX(),enemy4.getY(),enemy4.getWidth(),enemy4.getHeight(),this);
+	}
 	public void run()
 	   {
 	   	try
@@ -80,6 +110,7 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	   		{
 	   		   Thread.currentThread().sleep(5);
 	            repaint();
+	            
 	         }
 	      }
 	   		catch(Exception e)
@@ -92,11 +123,26 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 		g2d.setFont( new Font("Broadway", Font.BOLD, 50));
 		g2d.setColor(Color.red);
 		g2d.drawString("Welcome to The Worlds Hardest Game", 200,400);
-		g2d.drawString("Press B to Begin", 200, 600);
-		g2d.drawString("Use arrow keys to move ", 200, 800);
+		g2d.drawString("Use arrow keys to move and avoidSKIBIDIS", 200, 600);
+		g2d.drawString("Use arrow keys to move and avoid the SKIBIDIS ", 200, 800);
 
 }
-	
+	 private void bounceEnemy(Enemy enemy) {
+	        // Reverse direction if hitting top or bottom of the screen
+	        if (enemy.getY() + enemy.getHeight() >= getHeight()) {
+	            enemy.setDy(-enemy.getDy()); // Reverse dy
+	        }
+	        if (enemy.getY() <=0) {
+	        	enemy.setDy(enemy.getDy());
+	        }
+	        
+	        }
+	    
+	 
+	public void drawEnemies(Graphics2D g2d) {
+        // Draw each enemy
+        
+    }
 	
 	public void paint(Graphics g){
 		
@@ -144,13 +190,13 @@ public class Game  extends JPanel implements Runnable, KeyListener{
 	        }
 	    } else if (screen == 'G') { // Check if the game screen is active
 	        if (key == 39) { // Right arrow key
-	            player.setdx(2);
+	            player.setdx(10);
 	        } else if (key == 37) { // Left arrow key
-	            player.setdx(-2);
+	            player.setdx(-10);
 	        } else if (key == 40) { // Down arrow key
-	            player.setdy(2);
+	            player.setdy(10);
 	        } else if (key == 38) { // Up arrow key
-	            player.setdy(-2);
+	            player.setdy(-10);
 	        }
 	    }
 	}
