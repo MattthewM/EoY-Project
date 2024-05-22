@@ -4,9 +4,9 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class PlayableGuy {
-    private int x, y, width, height;
+    public int x, y, width, height;
     public ImageIcon pic;
-    private int dx, dy;
+    public int dx, dy;
     
     
     public PlayableGuy()
