@@ -31,7 +31,13 @@ public class PlayableGuy {
     }
 
     // Other methods...
+    public void setX(int x) {
+        this.x = x;
+    }
 
+    public void setY(int y) {
+        this.y = y;
+    }
     public void move() {
         x+= dx;
         y+= dy;
