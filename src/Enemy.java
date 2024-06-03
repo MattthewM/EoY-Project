@@ -26,7 +26,7 @@ public class Enemy {
         this.width = width;
         this.height = height;
         pic=p;
-        this.dy = 4;
+        this.dy = 5;
     }
 
     public void move() {
